@@ -21,6 +21,7 @@ import com.moises.cursomc.repositories.EnderecoRepository;
 import com.moises.cursomc.services.exceptions.DataIntegrityException;
 import com.moises.cursomc.services.exceptions.ObjectNotFoundException;
 
+
 @Service
 public class ClienteService {
 
@@ -30,11 +31,13 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	
 	public Cliente find(Integer id) {
-		Cliente obj = repo.findOne(id);
-		if(obj == null) {
-			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id
-					+ ", Tipo: "+ Cliente.class.getName());
-		}
+
+		 Cliente obj = repo.findOne(id);
+		  
+		  if(obj == null) {
+				throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id);
+			}
+		  	
 		return obj;
 	}
 	
@@ -59,7 +62,7 @@ public class ClienteService {
 		repo.delete(id);
 		}
 		catch(DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível excluir um registro com referências!");
+			throw new DataIntegrityException("Não é possível excluir o registro pois há pedidos relacionados!");
 		}
 	}
 	

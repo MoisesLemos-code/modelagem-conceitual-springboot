@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.moises.cursomc.services.exceptions.DataIntegrityException;
 import com.moises.cursomc.services.exceptions.ObjectNotFoundException;
 
+
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
@@ -26,6 +27,13 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
 		
 		StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
+	@ExceptionHandler(NumberFormatException.class)
+	public ResponseEntity<StandardError> numberFormat(NumberFormatException e, HttpServletRequest request){
+		
+		StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), "Valor inválido, verifique!", System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 	
