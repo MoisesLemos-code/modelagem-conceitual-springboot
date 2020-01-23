@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.moises.cursomc.domain.Cliente;
 import com.moises.cursomc.dto.ClienteDTO;
+import com.moises.cursomc.dto.ClienteListDTO;
 import com.moises.cursomc.dto.ClienteNewDTO;
 import com.moises.cursomc.services.ClienteService;
 
@@ -61,20 +62,20 @@ public class ClienteResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity <List<ClienteDTO>> findAll() {
+	public ResponseEntity <List<ClienteListDTO>> findAll() {
 		List <Cliente> list = service.findAll();
-		List <ClienteDTO> listDTO = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
+		List <ClienteListDTO> listDTO = list.stream().map(obj -> new ClienteListDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok(listDTO);
 	} 
 	
 	@RequestMapping(value="/page",method=RequestMethod.GET)
-	public ResponseEntity <Page<ClienteDTO>> findPage(
+	public ResponseEntity <Page<ClienteListDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
 			@RequestParam(value="direction", defaultValue="ASC") String direction, 
 			@RequestParam(value="orderBy", defaultValue="nome") String orderBy) {
 		Page <Cliente> list = service.findPage(page, linesPerPage, direction, orderBy);
-		Page <ClienteDTO> listDTO = list.map(obj -> new ClienteDTO(obj));
+		Page <ClienteListDTO> listDTO = list.map(obj -> new ClienteListDTO(obj));
 		return ResponseEntity.ok(listDTO);
 	} 
 }

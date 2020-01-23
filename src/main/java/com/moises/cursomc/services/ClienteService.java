@@ -75,7 +75,17 @@ public class ClienteService {
 		return repo.findAll(pageRequest);
 	}
 	public Cliente fromDTO(ClienteDTO objDto) {
-		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
+
+		Cliente cli = new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()));
+		cli.getTelefones().add(objDto.getTelefone1());
+		if(objDto.getTelefone2() !=null) {
+			cli.getTelefones().add(objDto.getTelefone2());
+		}
+		if(objDto.getTelefone3() !=null) {
+			cli.getTelefones().add(objDto.getTelefone3());
+		}
+		
+		return cli;
 	}
 	
 	//Atualizar somente nome e email de cliente
@@ -99,5 +109,9 @@ public class ClienteService {
 	private void updateData(Cliente newObj, Cliente obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
+		newObj.setCpfOuCnpj(obj.getCpfOuCnpj());
+		newObj.setTipo(obj.getTipo());
+		newObj.setTelefones(obj.getTelefones());
+	
 	}
 }

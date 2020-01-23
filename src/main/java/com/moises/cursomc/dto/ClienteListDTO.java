@@ -7,11 +7,10 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.moises.cursomc.domain.Cliente;
-import com.moises.cursomc.services.validation.ClienteUpdate;
 
 //Utilizado para realizar a inserção de novos registro
-@ClienteUpdate
-public class ClienteDTO implements Serializable{
+
+public class ClienteListDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -28,23 +27,14 @@ public class ClienteDTO implements Serializable{
 	//@CPF @CNPJ
 	private String cpfOuCnpj;
 	
-	private Integer tipo;
 	
-	@NotEmpty(message="Preenchimento obrigatório! (Pelo menos 1 telefone)")
-	private String telefone1;
+	public ClienteListDTO() {}
 	
-	private String telefone2;
-	
-	private String telefone3;
-	
-	private Integer cidadeId;
-	
-	public ClienteDTO() {}
-	
-	public ClienteDTO(Cliente obj) {
+	public ClienteListDTO(Cliente obj) {
 		id = obj.getId();
 		nome = obj.getNome();
 		email = obj.getEmail();
+		cpfOuCnpj = obj.getCpfOuCnpj();
 	}
 	
 
@@ -79,47 +69,5 @@ public class ClienteDTO implements Serializable{
 	public void setCpfOuCnpj(String cpfOuCnpj) {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
-
-	public Integer getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getTelefone1() {
-		return telefone1;
-	}
-
-	public void setTelefone1(String telefone1) {
-		this.telefone1 = telefone1;
-	}
-
-	public String getTelefone2() {
-		return telefone2;
-	}
-
-	public void setTelefone2(String telefone2) {
-		this.telefone2 = telefone2;
-	}
-
-	public String getTelefone3() {
-		return telefone3;
-	}
-
-	public void setTelefone3(String telefone3) {
-		this.telefone3 = telefone3;
-	}
-
-	public Integer getCidadeId() {
-		return cidadeId;
-	}
-
-	public void setCidadeId(Integer cidadeId) {
-		this.cidadeId = cidadeId;
-	}
-
-	
 	
 }
