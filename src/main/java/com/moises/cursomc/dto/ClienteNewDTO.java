@@ -2,22 +2,51 @@ package com.moises.cursomc.dto;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.moises.cursomc.services.validation.ClienteInsert;
+
+
+//Utilizado para realizar a inserção de novos registros
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="Preenchimento obrigatório! Atributo: nome")
+	@Length(min=5,max=120, message="O tamanho deve ser 5 e 120 caracteres")
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento obrigatório! Atributo: email")
+	@Email(message="Email inválido")
 	private String email;
+	
+	@NotEmpty(message="Preenchimento obrigatório! Atributo: CPF ou CNPJ")
+	//@CPF @CNPJ
+	
 	private String cpfOuCnpj;
+	
 	private Integer tipo;
 	
+	@NotEmpty(message="Preenchimento obrigatório! Atributo: logradouro")
 	private String logradouro;
+	
+	@NotEmpty(message="Preenchimento obrigatório! Atributo: numero")
 	private String numero;
+	
 	private String complemento;
+	
 	private String bairro;
+	
+	@NotEmpty(message="Preenchimento obrigatório! Atributo: CEP")
 	private String cep;
 	
+	@NotEmpty(message="Preenchimento obrigatório! (Pelo menos 1 telefone)")
 	private String telefone1;
+	
 	private String telefone2;
+	
 	private String telefone3;
 	
 	private Integer cidadeId;
