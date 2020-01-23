@@ -7,8 +7,10 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.moises.cursomc.domain.Cliente;
+import com.moises.cursomc.services.validation.ClienteUpdate;
 
-//Utilizado para realizar a inserção de novos registros
+//Utilizado para realizar a inserção de novos registro
+@ClienteUpdate
 public class ClienteDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 

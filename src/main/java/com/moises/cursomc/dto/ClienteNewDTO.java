@@ -24,7 +24,6 @@ public class ClienteNewDTO implements Serializable {
 	
 	@NotEmpty(message="Preenchimento obrigatório! Atributo: CPF ou CNPJ")
 	//@CPF @CNPJ
-	
 	private String cpfOuCnpj;
 	
 	private Integer tipo;
