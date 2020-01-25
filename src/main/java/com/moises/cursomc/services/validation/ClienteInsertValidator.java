@@ -36,16 +36,17 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 			list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido!"));
 		}
 		
-		Cliente auxEmail = repo.findByEmail(objDto.getEmail());
-		if(auxEmail != null) {
+		Cliente aux = null;
+		aux = repo.findByEmail(objDto.getEmail());
+		if(aux != null) {
 			list.add(new FieldMessage("email", "Email já existente! "
-					+ "(Cliente: "+ auxEmail.getNome() + ")"));
+					+ "(Cliente: "+ aux.getNome() + ")"));
 		}
 		
-		Cliente auxCpfOuCnpj = repo.findByCpfOuCnpj(objDto.getCpfOuCnpj());
-		if(auxCpfOuCnpj != null) {
+		aux = repo.findByCpfOuCnpj(objDto.getCpfOuCnpj());
+		if(aux != null) {
 			list.add(new FieldMessage("cpfOuCnpj", "CPF/CNPJ já cadastrado! "
-					+ "(Cliente: "+ auxCpfOuCnpj.getNome() + ")"));
+					+ "(Cliente: "+ aux.getNome() + ")"));
 		}
 		
 		

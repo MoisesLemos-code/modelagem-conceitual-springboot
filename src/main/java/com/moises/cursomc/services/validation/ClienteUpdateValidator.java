@@ -39,10 +39,17 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 
 		// inclua os testes aqui, inserindo erros na lista
 		
-		Cliente auxEmail = repo.findByEmail(objDto.getEmail());
-		if(auxEmail != null && !auxEmail.getId().equals(urlId)) {
+		Cliente aux = null;
+		aux = repo.findByEmail(objDto.getEmail());
+		if(aux != null && !aux.getId().equals(urlId)) {
 			list.add(new FieldMessage("email", "Email já existente! "
-					+ "(Cliente: "+ auxEmail.getNome() + ")"));
+					+ "(Cliente: "+ aux.getNome() + ")"));
+		}
+		
+		aux = repo.findByCpfOuCnpj(objDto.getCpfOuCnpj());
+		if( aux != null && !aux.getId().equals(urlId)) {
+			list.add(new FieldMessage("cpfOuCnpj", "CPF/CNPJ já cadastrado! "
+					+ "(Cliente: "+ aux.getNome() + ")"));
 		}
 
 		for (FieldMessage e : list) {
